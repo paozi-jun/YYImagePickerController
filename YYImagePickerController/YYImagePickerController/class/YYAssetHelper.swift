@@ -9,6 +9,7 @@ class YYAssetHelper: NSObject {
     
     var assetsLibrary:ALAssetsLibrary!
     var assetGroups:NSMutableArray!
+    var assetPhotos:NSMutableArray!
     var bReverse:Bool!
     
     class func sharedAssetHelper()->YYAssetHelper{
@@ -34,14 +35,10 @@ class YYAssetHelper: NSObject {
         var assetGroupEnumerator = {(group:ALAssetsGroup!, stop:CMutablePointer<ObjCBool>)->Void in
             
             if !group{
-                if self.bReverse{
-                    self.assetGroups = NSMutableArray(array:self.assetGroups.reverseObjectEnumerator().allObjects)
-                }
                 result(self.assetGroups)
-                return;
+            }else{
+                self.assetGroups.addObject(group)
             }
-            
-            self.assetGroups.addObject(group)
         }
         
         var assetGroupEnumberatorFailure = {(error:NSError!)->Void in
@@ -50,4 +47,21 @@ class YYAssetHelper: NSObject {
         self.assetGroups = NSMutableArray()
         self.assetsLibrary.enumerateGroupsWithTypes(ALAssetsGroupType(ALAssetsGroupSavedPhotos), usingBlock: assetGroupEnumerator, failureBlock:assetGroupEnumberatorFailure)
     }
+    
+    func getPhotoListOfGroup(alGroup:ALAssetsGroup,result:(NSArray)->Void){
+        self.initAsset()
+        
+        self.assetPhotos = NSMutableArray()
+        //alGroup.setAssetsFilter(ALAssetsFilter.allPhotos())
+        
+        alGroup.enumerateAssetsUsingBlock({(alPhoto:ALAsset!, index:Int,stop: CMutablePointer<ObjCBool>) -> Void in
+            if alPhoto == nil || !alPhoto{
+                result(self.assetPhotos)
+                return
+            }else{
+                self.assetPhotos.addObject(alPhoto)
+            }
+            })
+    }
+    
 }

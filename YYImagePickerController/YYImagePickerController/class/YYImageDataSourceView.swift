@@ -9,6 +9,10 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     var dataSourceArray:NSMutableArray = NSMutableArray()
     var dismissBlock:()->() = {()->() in}
     var completeBlock:()->() = {()->() in}
+    var selectGroupBlock:(ALAssetsGroup)->Void = {(group:ALAssetsGroup)->Void in}
+    var isShowDataView:Bool!
+    
+    var lastSelectIndePath:NSIndexPath!
     
     var backgroundView:UIButton!
     var tableView:UITableView!
@@ -54,17 +58,73 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
 
     func initData(){
+        lastSelectIndePath = NSIndexPath(forRow: 0, inSection: 0)
+        
         YYAssetHelper.sharedAssetHelper().getGroupList({(array:NSArray)->Void in
             self.dataSourceArray.removeAllObjects()
             self.dataSourceArray.addObjectsFromArray(array)
             if self.dataSourceArray.count > 0{
                 var group = self.dataSourceArray.objectAtIndex(0) as ALAssetsGroup
                 self.title = group.valueForProperty(ALAssetsGroupPropertyName) as String
+                self.selectGroupBlock(group)
+                if self.tableView {
+                    self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0),animated:true,scrollPosition:UITableViewScrollPosition.Bottom)
+                }
             }
             })
     }
     
     func selectDataSouce(){
+        if isShowDataView {
+            self.didSelectDataSource()
+        }else{
+            if dataSourceArray.count == 0{
+                return
+            }
+            self.showDataSource()
+        }
+        
+    }
+    
+    func closeButtonClick(){
+        self.dismissBlock()
+    }
+    
+    func checkButtonClick(){
+        self.completeBlock()
+    }
+    
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int{
+        return dataSourceArray.count
+    }
+    
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!{
+        var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+            var selectView = UIView()
+            selectView.backgroundColor = mochaColorGreen
+            cell.selectedBackgroundView = selectView
+        var group = self.dataSourceArray.objectAtIndex(indexPath.row) as ALAssetsGroup
+        cell.textLabel.text = group.valueForProperty(ALAssetsGroupPropertyName) as String
+        cell.textLabel.textColor = UIColor.whiteColor()
+        cell.textLabel.font = UIFont.boldSystemFontOfSize(17)
+        
+        cell.detailTextLabel.text = "\(group.numberOfAssets())"
+        cell.detailTextLabel.textColor = UIColor.whiteColor()
+
+        return cell
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
+        if indexPath.row != lastSelectIndePath.row{
+            var group = self.dataSourceArray.objectAtIndex(indexPath.row) as ALAssetsGroup
+            self.selectGroupBlock(group)
+            lastSelectIndePath = indexPath
+        }
+        
+        self.didSelectDataSource()
+    }
+    
+    func showDataSource(){
         let tableViewHeight:Float = 200
         if !self.superview{
             return
@@ -82,6 +142,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             self.tableView.dataSource = self
             self.tableView.delegate = self
             self.backgroundView.addSubview(self.tableView)
+            self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0),animated:true,scrollPosition:UITableViewScrollPosition.Bottom)
         }
         
         self.backgroundView.alpha = 0
@@ -96,31 +157,6 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             })
     }
     
-    func closeButtonClick(){
-        self.dismissBlock()
-    }
-    
-    func checkButtonClick(){
-        self.completeBlock()
-    }
-    
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int{
-        return dataSourceArray.count
-    }
-    
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!{
-        var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
-            var selectView = UIView()
-            selectView.backgroundColor = mochaColorGreen
-            cell.selectedBackgroundView = selectView
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
-        self.didSelectDataSource()
-    }
-    
     func didSelectDataSource(){
         var frame = self.tableView.frame
         frame.origin.y = self.backgroundView.frame.size.height
@@ -130,5 +166,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             }, completion: {(_)->Void in
             })
     }
+    
+    
     
 }

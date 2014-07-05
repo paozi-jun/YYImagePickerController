@@ -1,6 +1,7 @@
 
 
 import UIKit
+import AssetsLibrary
 
 let mochaColorGreen = UIColor(red: 0x96/255.0, green: 0xc8/255.0, blue: 0x60/255.0, alpha: 1)
 let dataSourceViewHeight:Float = 50
@@ -9,6 +10,8 @@ class YYImagePickerController: UIViewController {
     
     var dataSourceView:YYImageDataSourceView!
     
+    var collectionView:UICollectionView!
+    var imageDataArray:NSMutableArray!
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
@@ -21,14 +24,22 @@ class YYImagePickerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.imageDataArray = NSMutableArray()
+        
         self.dataSourceView = YYImageDataSourceView(frame:CGRectMake(0,self.view.frame.size.height-dataSourceViewHeight,self.view.frame.size.width,dataSourceViewHeight))
         self.view.addSubview(self.dataSourceView)
-        self.dataSourceView.title = "这是一个例子"
+        
         self.dataSourceView.dismissBlock = {()->() in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         self.dataSourceView.completeBlock = {()->() in
             self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        self.dataSourceView.selectGroupBlock = {(group:ALAssetsGroup)->Void in
+            YYAssetHelper.sharedAssetHelper().getPhotoListOfGroup(group, result: {(array:NSArray) -> Void in
+                self.imageDataArray.addObjectsFromArray(array)
+                })
         }
     }
 
