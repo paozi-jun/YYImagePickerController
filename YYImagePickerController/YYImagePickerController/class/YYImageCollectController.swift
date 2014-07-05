@@ -11,14 +11,15 @@ class YYImageCollectController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "图库"
+        
         var cancelButton:UIButton = YYViewUtil.button4NavBaritem("取消")
         cancelButton.addTarget(self, action: "cancel", forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-        // Do any additional setup after loading the view.
     }
 
     func cancel(){
-        
+        self.dismissViewControllerAnimated(true,completion:nil)
     }
     
     override func didReceiveMemoryWarning() {

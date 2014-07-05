@@ -20,9 +20,12 @@ class YYImagePickerController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationBar.setBackgroundImage(YYViewUtil.imageWithColor(mochaColorGreen), forBarMetrics: UIBarMetrics.Default)
         
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationBar.titleTextAttributes = titleDict
+        
+        self.navigationBar.setBackgroundImage(YYViewUtil.imageWithColor(mochaColorGreen), forBarMetrics: UIBarMetrics.Default)
+        self.view.backgroundColor = UIColor.whiteColor()
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
