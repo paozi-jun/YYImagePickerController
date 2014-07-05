@@ -9,7 +9,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     var dismissBlock:()->() = {()->() in}
     var completeBlock:()->() = {()->() in}
     
-    var backgroundView:UIView!
+    var backgroundView:UIButton!
     var tableView:UITableView!
     
     var _title:String!
@@ -56,8 +56,9 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             return
         }
         if !self.backgroundView {
-            self.backgroundView = UIView(frame:CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height-dataSourceViewHeight))
+            self.backgroundView = UIButton(frame:CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height-dataSourceViewHeight))
             self.backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.backgroundView.addTarget(self, action: "didSelectDataSource", forControlEvents: UIControlEvents.TouchUpInside)
             self.superview.addSubview(self.backgroundView)
         }
         
@@ -103,7 +104,17 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
-        
+        self.didSelectDataSource()
+    }
+    
+    func didSelectDataSource(){
+        var frame = self.tableView.frame
+        frame.origin.y = self.backgroundView.frame.size.height
+        UIView.animateWithDuration(0.3, animations: {
+            self.tableView.frame = frame
+            self.backgroundView.alpha = 0
+            }, completion: {(_)->Void in
+            })
     }
     
 }
