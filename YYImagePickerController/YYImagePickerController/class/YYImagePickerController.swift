@@ -3,10 +3,11 @@
 import UIKit
 
 let mochaColorGreen = UIColor(red: 0x96/255.0, green: 0xc8/255.0, blue: 0x60/255.0, alpha: 1)
+let dataSourceViewHeight:Float = 50
 
-class YYImagePickerController: UINavigationController {
-
-    var rootViewController:UIViewController!
+class YYImagePickerController: UIViewController {
+    
+    var dataSourceView:YYImageDataSourceView!
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -14,18 +15,21 @@ class YYImagePickerController: UINavigationController {
     }
 
     init(){
-        self.rootViewController = YYImageCollectController(nibName: nil, bundle: nil)
-        super.init(rootViewController:self.rootViewController)
+        super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationBar.titleTextAttributes = titleDict
-        
-        self.navigationBar.setBackgroundImage(YYViewUtil.imageWithColor(mochaColorGreen), forBarMetrics: UIBarMetrics.Default)
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.dataSourceView = YYImageDataSourceView(frame:CGRectMake(0,self.view.frame.size.height-dataSourceViewHeight,self.view.frame.size.width,dataSourceViewHeight))
+        self.view.addSubview(self.dataSourceView)
+        self.dataSourceView.title = "这是一个例子"
+        self.dataSourceView.dismissBlock = {()->() in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        self.dataSourceView.completeBlock = {()->() in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
