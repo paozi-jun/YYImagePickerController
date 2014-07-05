@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F0C72A91967E57300B6EF58 /* YYAssetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0C72A81967E57300B6EF58 /* YYAssetHelper.swift */; };
+		8F0C72AB1967E5CF00B6EF58 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0C72AA1967E5CF00B6EF58 /* AssetsLibrary.framework */; };
 		8F5024FD1967AE86008E2CF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5024FC1967AE86008E2CF5 /* AppDelegate.swift */; };
 		8F5024FF1967AE86008E2CF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F5024FE1967AE86008E2CF5 /* Images.xcassets */; };
 		8F50250B1967AE86008E2CF5 /* YYImagePickerControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50250A1967AE86008E2CF5 /* YYImagePickerControllerTests.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F0C72A81967E57300B6EF58 /* YYAssetHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYAssetHelper.swift; sourceTree = "<group>"; };
+		8F0C72AA1967E5CF00B6EF58 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8F5024F71967AE86008E2CF5 /* YYImagePickerController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YYImagePickerController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5024FB1967AE86008E2CF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F5024FC1967AE86008E2CF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F0C72AB1967E5CF00B6EF58 /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +90,7 @@
 		8F5024EE1967AE86008E2CF5 = {
 			isa = PBXGroup;
 			children = (
+				8F0C72AA1967E5CF00B6EF58 /* AssetsLibrary.framework */,
 				8F5024F91967AE86008E2CF5 /* YYImagePickerController */,
 				8F5025071967AE86008E2CF5 /* YYImagePickerControllerTests */,
 				8F5024F81967AE86008E2CF5 /* Products */,
@@ -144,6 +150,7 @@
 				8F5025171967AF4C008E2CF5 /* util */,
 				8FC8B3E11967C0D6005D937A /* view */,
 				8F50251E1967B2EB008E2CF5 /* YYImagePickerController.swift */,
+				8F0C72A81967E57300B6EF58 /* YYAssetHelper.swift */,
 			);
 			path = class;
 			sourceTree = "<group>";
@@ -291,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F0C72A91967E57300B6EF58 /* YYAssetHelper.swift in Sources */,
 				8F5024FD1967AE86008E2CF5 /* AppDelegate.swift in Sources */,
 				8F50251B1967AF4C008E2CF5 /* YYViewUtil.swift in Sources */,
 				8F50251A1967AF4C008E2CF5 /* YYUtil.swift in Sources */,

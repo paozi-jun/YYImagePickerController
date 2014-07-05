@@ -30,6 +30,10 @@ class YYImagePickerController: UIViewController {
         self.dataSourceView.completeBlock = {()->() in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+        
+        YYAssetHelper.sharedAssetHelper().getGroupList({(array:NSArray)->Void in
+            NSLog("%@", array)
+            })
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

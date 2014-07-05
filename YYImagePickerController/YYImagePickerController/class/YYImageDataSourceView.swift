@@ -48,8 +48,14 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
         checkButton.setImage(UIImage(named:"check"), forState: UIControlState.Normal)
         checkButton.addTarget(self, action: "checkButtonClick", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(checkButton)
+        
+        self.initData()
     }
 
+    func initData(){
+        
+    }
+    
     func selectDataSouce(){
         let tableViewHeight:Float = 200
         if !self.superview{
