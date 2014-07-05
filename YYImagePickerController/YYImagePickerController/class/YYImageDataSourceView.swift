@@ -1,11 +1,12 @@
 
 
 import UIKit
+import AssetsLibrary
 
 class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
 
     var dataTypeButton:UIButton!
-    
+    var dataSourceArray:NSMutableArray = NSMutableArray()
     var dismissBlock:()->() = {()->() in}
     var completeBlock:()->() = {()->() in}
     
@@ -53,7 +54,14 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
 
     func initData(){
-        
+        YYAssetHelper.sharedAssetHelper().getGroupList({(array:NSArray)->Void in
+            self.dataSourceArray.removeAllObjects()
+            self.dataSourceArray.addObjectsFromArray(array)
+            if self.dataSourceArray.count > 0{
+                var group = self.dataSourceArray.objectAtIndex(0) as ALAssetsGroup
+                self.title = group.valueForProperty(ALAssetsGroupPropertyName) as String
+            }
+            })
     }
     
     func selectDataSouce(){
@@ -97,7 +105,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int{
-        return 10
+        return dataSourceArray.count
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!{

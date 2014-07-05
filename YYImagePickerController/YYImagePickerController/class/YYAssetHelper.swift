@@ -30,10 +30,8 @@ class YYAssetHelper: NSObject {
     
     func getGroupList(result:(NSArray)->()){
         self.initAsset()
-        
       
         var assetGroupEnumerator = {(group:ALAssetsGroup!, stop:CMutablePointer<ObjCBool>)->Void in
-            group.setAssetsFilter(ALAssetsFilter.allPhotos())
             
             if !group{
                 if self.bReverse{
@@ -50,19 +48,6 @@ class YYAssetHelper: NSObject {
         }
         
         self.assetGroups = NSMutableArray()
-        self.assetsLibrary.enumerateGroupsWithTypes(ALAssetsGroupType(ALAssetsGroupAll), usingBlock: {(group:ALAssetsGroup!, stop:CMutablePointer<ObjCBool>)->Void in
-            group.setAssetsFilter(ALAssetsFilter.allPhotos())
-            
-            if !group{
-                if self.bReverse{
-                    self.assetGroups = NSMutableArray(array:self.assetGroups.reverseObjectEnumerator().allObjects)
-                }
-                result(self.assetGroups)
-                return;
-            }
-            
-            self.assetGroups.addObject(group)
-            }, failureBlock:assetGroupEnumberatorFailure)
+        self.assetsLibrary.enumerateGroupsWithTypes(ALAssetsGroupType(ALAssetsGroupSavedPhotos), usingBlock: assetGroupEnumerator, failureBlock:assetGroupEnumberatorFailure)
     }
-    
 }
