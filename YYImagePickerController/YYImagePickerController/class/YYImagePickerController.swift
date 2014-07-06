@@ -106,6 +106,12 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         return CGSizeMake(width, width)
     }
     
+    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
+        var image = self.imageDataArray.objectAtIndex(indexPath.row) as YYImage
+        image.isSelect = !image.isSelect
+        self.collectionView.reloadData()
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
