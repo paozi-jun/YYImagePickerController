@@ -12,6 +12,20 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
     
     var collectionView:UICollectionView!
     var imageDataArray:NSMutableArray!
+    
+    var _numberOfRow:Int!
+    var numberOfRow:Int!{
+    set{
+        self._numberOfRow = newValue
+        if self.collectionView{
+            self.collectionView.reloadData()
+        }
+    }
+    get{
+        return self._numberOfRow
+        
+    }
+    }
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
@@ -28,6 +42,7 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         
         self.initCollectionView()
         
+        self.numberOfRow = 3
         
         self.dataSourceView = YYImageDataSourceView(frame:CGRectMake(0,self.view.frame.size.height-dataSourceViewHeight,self.view.frame.size.width,dataSourceViewHeight))
         self.view.addSubview(self.dataSourceView)
@@ -41,7 +56,12 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         
         self.dataSourceView.selectGroupBlock = {(group:ALAssetsGroup)->Void in
             YYAssetHelper.sharedAssetHelper().getPhotoListOfGroup(group, result: {(array:NSArray) -> Void in
-                self.imageDataArray.addObjectsFromArray(array)
+                for asset : AnyObject in array{
+                    var image = YYImage()
+                    image.asset = asset as ALAsset
+                    self.imageDataArray.addObject(image)
+                }
+                
                 self.collectionView.reloadData()
                 })
         }
@@ -69,24 +89,21 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         var identify = "cell"
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify,forIndexPath:indexPath) as YYImageCell
         cell.sizeToFit()
-//        if (!cell) {
-//            
-//        }
-        //    VideoModel *model = [self.videoModels objectAtIndex:indexPath.row];
-        //    NSURL *url = [NSURL URLWithString:model.videoImgURL];
-        //
-        //    [cell.imgView setImageWithURL:url];
-        //    cell.titleLbale.text = model.videoTitle;
+        
+        var asset:YYImage = self.imageDataArray.objectAtIndex(indexPath.row) as YYImage
+        cell.update(asset)
+
         return cell
     }
     
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, insetForSectionAtIndex section: Int) -> UIEdgeInsets{
-        var top = UIEdgeInsets(top: 5,left: 20,bottom: 5,right: 20)
+        var top = UIEdgeInsets(top: 5,left: 10,bottom: 5,right: 10)
         return top
     }
     
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize{
-        return CGSizeMake(80, 80)
+        var width = (self.collectionView.frame.size.width-10.0*Float(self.numberOfRow+1))/Float(self.numberOfRow)
+        return CGSizeMake(width, width)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -97,16 +114,6 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // #pragma mark - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -10,7 +10,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     var dismissBlock:()->() = {()->() in}
     var completeBlock:()->() = {()->() in}
     var selectGroupBlock:(ALAssetsGroup)->Void = {(group:ALAssetsGroup)->Void in}
-    var isShowDataView:Bool!
+    var isShowDataView:Bool = false
     
     var lastSelectIndePath:NSIndexPath!
     
@@ -75,7 +75,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func selectDataSouce(){
-        if isShowDataView {
+        if self.isShowDataView {
             self.didSelectDataSource()
         }else{
             if dataSourceArray.count == 0{
@@ -133,6 +133,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             self.backgroundView = UIButton(frame:CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height-dataSourceViewHeight))
             self.backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             self.backgroundView.addTarget(self, action: "didSelectDataSource", forControlEvents: UIControlEvents.TouchUpInside)
+            self.backgroundView.clipsToBounds = true
             self.superview.addSubview(self.backgroundView)
         }
         
@@ -154,6 +155,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             self.tableView.frame = frame
             self.backgroundView.alpha = 1
             }, completion: {(_)->Void in
+                self.isShowDataView = true
             })
     }
     
@@ -164,6 +166,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             self.tableView.frame = frame
             self.backgroundView.alpha = 0
             }, completion: {(_)->Void in
+                self.isShowDataView = false
             })
     }
     

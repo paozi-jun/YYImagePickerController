@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     func show(){
         var imagePickerVC = YYImagePickerController()
         self.presentViewController(imagePickerVC, animated: true, completion: nil)
+        imagePickerVC.numberOfRow = 4
     }
     
     override func didReceiveMemoryWarning() {

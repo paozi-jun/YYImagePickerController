@@ -29,6 +29,7 @@
 		8FC8B3F81967C2A7005D937A /* show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8B3ED1967C2A7005D937A /* show@2x.png */; };
 		8FC8B3F91967C2A7005D937A /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8B3EE1967C2A7005D937A /* up.png */; };
 		8FC8B3FA1967C2A7005D937A /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8B3EF1967C2A7005D937A /* up@2x.png */; };
+		8FCD220E1968EC8800449D0C /* YYImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD220D1968EC8800449D0C /* YYImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		8FC8B3ED1967C2A7005D937A /* show@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@2x.png"; sourceTree = "<group>"; };
 		8FC8B3EE1967C2A7005D937A /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		8FC8B3EF1967C2A7005D937A /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
+		8FCD220D1968EC8800449D0C /* YYImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			children = (
 				8FC8B3E41967C2A7005D937A /* Images */,
 				8F5025171967AF4C008E2CF5 /* util */,
+				8FF8F3C31968E98E0084D307 /* model */,
 				8FC8B3E11967C0D6005D937A /* view */,
 				8F50251E1967B2EB008E2CF5 /* YYImagePickerController.swift */,
 				8F0C72A81967E57300B6EF58 /* YYAssetHelper.swift */,
@@ -191,6 +194,14 @@
 				8FC8B3EF1967C2A7005D937A /* up@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		8FF8F3C31968E98E0084D307 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				8FCD220D1968EC8800449D0C /* YYImage.swift */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +253,7 @@
 				TargetAttributes = {
 					8F5024F61967AE86008E2CF5 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = A2U2C53R7M;
 					};
 					8F5025031967AE86008E2CF5 = {
 						CreatedOnToolsVersion = 6.0;
@@ -307,6 +319,7 @@
 				8F50251B1967AF4C008E2CF5 /* YYViewUtil.swift in Sources */,
 				8F50251A1967AF4C008E2CF5 /* YYUtil.swift in Sources */,
 				8F50251D1967AFB1008E2CF5 /* MainViewController.swift in Sources */,
+				8FCD220E1968EC8800449D0C /* YYImage.swift in Sources */,
 				8FC8B3E31967C109005D937A /* YYImageDataSourceView.swift in Sources */,
 				8F50251F1967B2EB008E2CF5 /* YYImagePickerController.swift in Sources */,
 			);
@@ -413,9 +426,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YYImagePickerController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -424,9 +442,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = YYImagePickerController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
