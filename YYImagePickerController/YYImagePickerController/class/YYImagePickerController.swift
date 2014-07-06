@@ -9,9 +9,12 @@ let dataSourceViewHeight:Float = 50
 class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     var dataSourceView:YYImageDataSourceView!
+    var completeBlock:((NSArray)->())!
     
     var collectionView:UICollectionView!
     var imageDataArray:NSMutableArray!
+    
+    var selectDataArray:NSMutableArray!
     
     var _numberOfRow:Int!
     var numberOfRow:Int!{
@@ -51,7 +54,13 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         self.dataSourceView.completeBlock = {()->() in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: {() -> Void in
+                if self.completeBlock{
+                    if self.selectDataArray{
+                        self.completeBlock(self.selectDataArray)
+                    }
+                }
+                })
         }
         
         self.dataSourceView.selectGroupBlock = {(group:ALAssetsGroup)->Void in
@@ -110,6 +119,15 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         var image = self.imageDataArray.objectAtIndex(indexPath.row) as YYImage
         image.isSelect = !image.isSelect
         self.collectionView.reloadData()
+        if !self.selectDataArray{
+            self.selectDataArray = NSMutableArray()
+        }
+        if image.isSelect{
+            self.selectDataArray.addObject(image.asset)
+        }else{
+            self.selectDataArray.removeObject(image.asset)
+        }
+        self.dataSourceView.updateSelectNum(self.selectDataArray.count)
     }
     
 //    override func preferredStatusBarStyle() -> UIStatusBarStyle {

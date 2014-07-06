@@ -170,6 +170,14 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
             })
     }
     
-    
+    func updateSelectNum(num:Int){
+        var group = self.dataSourceArray.objectAtIndex(0) as ALAssetsGroup
+        var text = group.valueForProperty(ALAssetsGroupPropertyName) as String
+        if num > 0{
+            text = "\(text)  \(num)"
+        }
+        self.title = text
+        
+    }
     
 }
