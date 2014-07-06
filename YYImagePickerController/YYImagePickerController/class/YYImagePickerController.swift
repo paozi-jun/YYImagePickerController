@@ -3,15 +3,21 @@
 import UIKit
 import AssetsLibrary
 
+protocol YYImagePickerDelegate{
+    func imagePickerDidSelectImages(array:NSArray)
+}
+
+
 let mochaColorGreen = UIColor(red: 0x96/255.0, green: 0xc8/255.0, blue: 0x60/255.0, alpha: 1)
 let dataSourceViewHeight:Float = 50
 
 class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
+    var delegate:YYImagePickerDelegate!
+    
     var dataSourceView:YYImageDataSourceView!
     
     var limitMaxSelectNum:Int!
-    var completeBlock:((NSArray)->())!
     
     var collectionView:UICollectionView!
     var imageDataArray:NSMutableArray!
@@ -57,10 +63,8 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         }
         self.dataSourceView.completeBlock = {()->() in
             self.dismissViewControllerAnimated(true, completion: {() -> Void in
-                if self.completeBlock{
-                    if self.selectDataArray{
-                        self.completeBlock(self.selectDataArray)
-                    }
+                if self.delegate{
+                    self.delegate.imagePickerDidSelectImages(self.selectDataArray)
                 }
                 })
         }

@@ -2,7 +2,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController,YYImagePickerDelegate {
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -21,13 +21,14 @@ class MainViewController: UIViewController {
     func show(){
         var imagePickerVC = YYImagePickerController()
         self.presentViewController(imagePickerVC, animated: true, completion: nil)
+        imagePickerVC.delegate = self
         imagePickerVC.numberOfRow = 4
         imagePickerVC.limitMaxSelectNum = 3
-        imagePickerVC.completeBlock = {(array:NSArray)->Void in
-            println("\(array.count)")
-        }
     }
     
+    func imagePickerDidSelectImages(array:NSArray){
+        println("\(array.count)")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
