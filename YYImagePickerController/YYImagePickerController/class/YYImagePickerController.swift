@@ -4,7 +4,7 @@ import UIKit
 import AssetsLibrary
 
 protocol YYImagePickerDelegate{
-    func imagePickerDidSelectImages(array:NSArray)
+    func imagePickerDidSelectImages(array:NSArray!)
 }
 
 

@@ -26,8 +26,10 @@ class MainViewController: UIViewController,YYImagePickerDelegate {
         imagePickerVC.limitMaxSelectNum = 3
     }
     
-    func imagePickerDidSelectImages(array:NSArray){
-        println("\(array.count)")
+    func imagePickerDidSelectImages(array:NSArray!){
+        if array{
+            println("\(array.count)")
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

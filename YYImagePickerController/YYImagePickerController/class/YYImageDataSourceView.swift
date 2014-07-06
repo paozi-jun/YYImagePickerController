@@ -78,7 +78,7 @@ class YYImageDataSourceView: UIView,UITableViewDataSource,UITableViewDelegate {
         if self.isShowDataView {
             self.didSelectDataSource()
         }else{
-            if dataSourceArray.count == 0{
+            if dataSourceArray.count <= 1{
                 return
             }
             self.showDataSource()
