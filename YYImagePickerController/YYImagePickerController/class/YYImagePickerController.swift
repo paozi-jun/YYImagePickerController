@@ -9,6 +9,8 @@ let dataSourceViewHeight:Float = 50
 class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     var dataSourceView:YYImageDataSourceView!
+    
+    var limitMaxSelectNum:Int!
     var completeBlock:((NSArray)->())!
     
     var collectionView:UICollectionView!
@@ -123,6 +125,14 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
             self.selectDataArray = NSMutableArray()
         }
         if image.isSelect{
+            if self.limitMaxSelectNum {
+                if self.selectDataArray.count >= self.limitMaxSelectNum{
+                    var alert = YYAlertView(title:"提示",content:"选择数目超过限制，你可以取消一些选项然后重新选择", leftTitle:nil,rightTitle:"确定")
+                    alert.show()
+                    image.isSelect = false
+                    return
+                }
+            }
             self.selectDataArray.addObject(image.asset)
         }else{
             self.selectDataArray.removeObject(image.asset)

@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
         var imagePickerVC = YYImagePickerController()
         self.presentViewController(imagePickerVC, animated: true, completion: nil)
         imagePickerVC.numberOfRow = 4
+        imagePickerVC.limitMaxSelectNum = 3
         imagePickerVC.completeBlock = {(array:NSArray)->Void in
             println("\(array.count)")
         }

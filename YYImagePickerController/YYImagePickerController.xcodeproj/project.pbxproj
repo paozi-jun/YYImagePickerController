@@ -12,8 +12,6 @@
 		8F5024FD1967AE86008E2CF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5024FC1967AE86008E2CF5 /* AppDelegate.swift */; };
 		8F5024FF1967AE86008E2CF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F5024FE1967AE86008E2CF5 /* Images.xcassets */; };
 		8F50250B1967AE86008E2CF5 /* YYImagePickerControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50250A1967AE86008E2CF5 /* YYImagePickerControllerTests.swift */; };
-		8F50251A1967AF4C008E2CF5 /* YYUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5025181967AF4C008E2CF5 /* YYUtil.swift */; };
-		8F50251B1967AF4C008E2CF5 /* YYViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5025191967AF4C008E2CF5 /* YYViewUtil.swift */; };
 		8F50251D1967AFB1008E2CF5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50251C1967AFB1008E2CF5 /* MainViewController.swift */; };
 		8F50251F1967B2EB008E2CF5 /* YYImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50251E1967B2EB008E2CF5 /* YYImagePickerController.swift */; };
 		8F5BD1E81968416C003FE4AE /* YYImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5BD1E71968416C003FE4AE /* YYImageCell.swift */; };
@@ -25,6 +23,7 @@
 		8FC8B3F71967C2A7005D937A /* show.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8B3EC1967C2A7005D937A /* show.png */; };
 		8FC8B3F81967C2A7005D937A /* show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8B3ED1967C2A7005D937A /* show@2x.png */; };
 		8FCD220E1968EC8800449D0C /* YYImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD220D1968EC8800449D0C /* YYImage.swift */; };
+		8FCD22101969065000449D0C /* YYAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD220F1969065000449D0C /* YYAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +46,6 @@
 		8F5025041967AE86008E2CF5 /* YYImagePickerControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YYImagePickerControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5025091967AE86008E2CF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F50250A1967AE86008E2CF5 /* YYImagePickerControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YYImagePickerControllerTests.swift; sourceTree = "<group>"; };
-		8F5025181967AF4C008E2CF5 /* YYUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYUtil.swift; sourceTree = "<group>"; };
-		8F5025191967AF4C008E2CF5 /* YYViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYViewUtil.swift; sourceTree = "<group>"; };
 		8F50251C1967AFB1008E2CF5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8F50251E1967B2EB008E2CF5 /* YYImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYImagePickerController.swift; sourceTree = "<group>"; };
 		8F5BD1E71968416C003FE4AE /* YYImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYImageCell.swift; sourceTree = "<group>"; };
@@ -60,6 +57,7 @@
 		8FC8B3EC1967C2A7005D937A /* show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = show.png; sourceTree = "<group>"; };
 		8FC8B3ED1967C2A7005D937A /* show@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "show@2x.png"; sourceTree = "<group>"; };
 		8FCD220D1968EC8800449D0C /* YYImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYImage.swift; sourceTree = "<group>"; };
+		8FCD220F1969065000449D0C /* YYAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				8FC8B3E41967C2A7005D937A /* Images */,
-				8F5025171967AF4C008E2CF5 /* util */,
 				8FF8F3C31968E98E0084D307 /* model */,
 				8FC8B3E11967C0D6005D937A /* view */,
 				8F50251E1967B2EB008E2CF5 /* YYImagePickerController.swift */,
@@ -150,18 +147,10 @@
 			path = class;
 			sourceTree = "<group>";
 		};
-		8F5025171967AF4C008E2CF5 /* util */ = {
-			isa = PBXGroup;
-			children = (
-				8F5025181967AF4C008E2CF5 /* YYUtil.swift */,
-				8F5025191967AF4C008E2CF5 /* YYViewUtil.swift */,
-			);
-			path = util;
-			sourceTree = "<group>";
-		};
 		8FC8B3E11967C0D6005D937A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				8FCD220F1969065000449D0C /* YYAlertView.swift */,
 				8FC8B3E21967C109005D937A /* YYImageDataSourceView.swift */,
 				8F5BD1E71968416C003FE4AE /* YYImageCell.swift */,
 			);
@@ -294,10 +283,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F0C72A91967E57300B6EF58 /* YYAssetHelper.swift in Sources */,
+				8FCD22101969065000449D0C /* YYAlertView.swift in Sources */,
 				8F5BD1E81968416C003FE4AE /* YYImageCell.swift in Sources */,
 				8F5024FD1967AE86008E2CF5 /* AppDelegate.swift in Sources */,
-				8F50251B1967AF4C008E2CF5 /* YYViewUtil.swift in Sources */,
-				8F50251A1967AF4C008E2CF5 /* YYUtil.swift in Sources */,
 				8F50251D1967AFB1008E2CF5 /* MainViewController.swift in Sources */,
 				8FCD220E1968EC8800449D0C /* YYImage.swift in Sources */,
 				8FC8B3E31967C109005D937A /* YYImageDataSourceView.swift in Sources */,
