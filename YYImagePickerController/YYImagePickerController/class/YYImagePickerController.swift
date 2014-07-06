@@ -112,9 +112,9 @@ class YYImagePickerController: UIViewController,UICollectionViewDataSource,UICol
         self.collectionView.reloadData()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
+//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+//        return UIStatusBarStyle.LightContent
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
